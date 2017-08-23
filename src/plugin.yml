@@ -1,0 +1,14 @@
+name: HypixelCore
+description: HypixelCore remake
+main: me.ikeetjeop.hypixel.HypixelCore
+version: 1.0
+author: Ikeetjeop
+commands:rl
+
+  help:
+    description: ...
+  spawn:
+    description: ...
+    aliases: [hub, lobby]
+  help:
+    description: ...
