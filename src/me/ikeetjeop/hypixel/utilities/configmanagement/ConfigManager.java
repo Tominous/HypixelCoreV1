@@ -1,4 +1,4 @@
-package me.ikeetjeop.hypixel.utilities;
+package me.ikeetjeop.hypixel.utilities.configmanagement;
 
 import me.ikeetjeop.hypixel.HypixelCore;
 import org.bukkit.configuration.InvalidConfigurationException;

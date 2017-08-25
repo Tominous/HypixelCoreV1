@@ -21,12 +21,13 @@ public class QuitListener implements Listener{
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
+        e.setQuitMessage(null);
         try {
             MySQL MySQL = new MySQL(plugin.sqlHost, plugin.sqlPort, plugin.sqlDb, plugin.sqlUser, plugin.sqlPw);
             Statement statement = MySQL.openConnection().createStatement();
             ResultSet res = statement.executeQuery("SELECT * FROM Players WHERE UUID = '" + p.getUniqueId() + "';");
             if(res.next()) {
-                statement.executeUpdate("UPDATE Players SET IsOnline=0 WHERE UUID = '" + p.getUniqueId() + "'");
+                statement.executeUpdate("UPDATE Players SET Online=0 WHERE UUID = '" + p.getUniqueId() + "'");
             }
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
