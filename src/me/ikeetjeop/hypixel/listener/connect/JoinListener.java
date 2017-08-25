@@ -34,7 +34,7 @@ public class JoinListener implements Listener{
                 if(res.getInt("JoinAlert") == 1) {
                     //SetJoinMessage + check is default rank why: https://goo.gl/YW41KY
                     e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', message.getString("Messages.connect.JoinMessage")
-                            .replace("%rank%", plugin.chat.getGroupPrefix(p.getWorld(), plugin.getInstance().permission.getPrimaryGroup(p))).replace("%player%", p.getName())));
+                            .replace("%rank%", plugin.chat.getGroupPrefix(p.getWorld(), plugin.getInstance().permission.getPrimaryGroup(p))).replace("%player%", p.getName()).replace("{plus}", res.getString("Pluse"))));
                 }else{
                     e.setJoinMessage(null);
                 }

@@ -20,8 +20,8 @@ public class ConfigManager {
     public ConfigManager(HypixelCore main, String FileName) {
         this.main = main;
         this.file = new File(main.getDataFolder() + "/" + FileName);
-        if(!file.exists()){
-            try{
+        if (!file.exists()) {
+            try {
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -30,23 +30,19 @@ public class ConfigManager {
         this.config = YamlConfiguration.loadConfiguration(file);
     }
 
-    public void save(){
-        try{
+    public void save() {
+        try {
             config.save(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void reload(){
-        try{
-            try {
-                config.load(file);
-            } catch (InvalidConfigurationException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
+
+    public void reload() {
+        try {
+            config.load(file);
+        } catch (InvalidConfigurationException | IOException e) {
             e.printStackTrace();
         }
     }
-
 }

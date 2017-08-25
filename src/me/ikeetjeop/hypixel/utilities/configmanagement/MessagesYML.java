@@ -14,7 +14,7 @@ public class MessagesYML extends ConfigManager {
         super(main, "Messages.yml");
     }
 
-    public void SetString(){
+    public void setString(){
         config.addDefault("Messages.connect.JoinMessage", "%rank% %player% &6joined the lobby!");
         config.addDefault("Messages.Chat.Member", "&7%player%: ");
         config.addDefault("Messages.Chat.Ranked", "%rank%%player%&f: ");

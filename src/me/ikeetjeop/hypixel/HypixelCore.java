@@ -93,10 +93,10 @@ public class HypixelCore extends JavaPlugin{
 
     }
 
-    private MessagesYML message;
+    public MessagesYML message;
     private void registerConfig(){
         this.message = new MessagesYML(this);
-        message.SetString();
+        message.setString();
         getConfig().options().header("MYSQL needed for save playerdata!");
         //Mysql
         getConfig().addDefault("Hypixel.Connection.MySQL.Host", "localhost");
