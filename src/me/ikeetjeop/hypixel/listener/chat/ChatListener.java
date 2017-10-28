@@ -30,25 +30,40 @@ public class ChatListener implements Listener {
             ResultSet res = statement.executeQuery("SELECT * FROM Players WHERE UUID='" + p.getUniqueId() + "'");
             if (res.next()) {
                 try {
-                    event.setFormat(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Hypixel.Settings.chat." + plugin.getPermission().getPrimaryGroup(p))
-                            .replace("%rank%", plugin.chat.getGroupPrefix(p.getWorld(), plugin.getInstance().permission.getPrimaryGroup(p)))
-                            .replace("%player%", p.getName()).replace("{plus}", res.getString("Pluse"))) + event.getMessage());
+                    if (!event.getMessage().contains("&")) {
+                        event.setFormat(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Hypixel.Settings.chat." + plugin.getPermission().getPrimaryGroup(p))
+                                .replace("%rank%", plugin.chat.getPlayerPrefix(p.getPlayer()))
+                                .replace("%player%", p.getName()).replace("{plus}", res.getString("Pluse"))) + event.getMessage().replace("%", "%%"));
+                    } else {
+                        if (p.hasPermission("Hypixel.ChatColor") || p.hasPermission("Hypixel.Admin")) {
+                            event.setFormat(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Hypixel.Settings.chat." + plugin.getPermission().getPrimaryGroup(p))
+                                    .replace("%rank%", plugin.chat.getPlayerPrefix(p.getPlayer()))
+                                    .replace("%player%", p.getName()).replace("{plus}", res.getString("Pluse")) + event.getMessage().replace("%", "%%")));
+                        } else {
+                            event.setFormat(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Hypixel.Settings.chat." + plugin.getPermission().getPrimaryGroup(p))
+                                    .replace("%rank%", plugin.chat.getPlayerPrefix(p.getPlayer()))
+                                    .replace("%player%", p.getName()).replace("{plus}", res.getString("Pluse"))) + event.getMessage().replace("%", "%%"));
+                        }
+                    }
                 } catch (NullPointerException EX) {
-
-                    event.setFormat(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Hypixel.Settings.chat.Other")
-                            .replace("%rank%", plugin.chat.getGroupPrefix(p.getWorld(), plugin.getInstance().permission.getPrimaryGroup(p)))
-                            .replace("%player%", p.getName()).replace("{plus}", res.getString("Pluse"))) + event.getMessage());
-                }
-
-                if (p.hasPermission("Hypixel.ChatColor") || p.hasPermission("Hypixel.Admin")) {
-                    if (event.getMessage().contains("&")) {
-                        event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
+                    if (!event.getMessage().contains("&")) {
+                        event.setFormat(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Hypixel.Settings.chat.Other")
+                                .replace("%rank%", plugin.chat.getPlayerPrefix(p.getPlayer()))
+                                .replace("%player%", p.getName()).replace("{plus}", res.getString("Pluse"))) + event.getMessage().replace("%", "%%"));
+                    } else {
+                        if (p.hasPermission("Hypixel.ChatColor") || p.hasPermission("Hypixel.Admin")) {
+                            event.setFormat(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Hypixel.Settings.chat.Other")
+                                    .replace("%rank%", plugin.chat.getPlayerPrefix(p.getPlayer()))
+                                    .replace("%player%", p.getName()).replace("{plus}", res.getString("Pluse").replace("%", "%%")) + event.getMessage()));
+                        } else {
+                            event.setFormat(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Hypixel.Settings.chat.Other")
+                                    .replace("%rank%", plugin.chat.getPlayerPrefix(p.getPlayer()))
+                                    .replace("%player%", p.getName()).replace("{plus}", res.getString("Pluse"))) + event.getMessage().replace("%", "%%"));
+                        }
                     }
                 }
-
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            Bukkit.getConsoleSender().sendMessage("AAQAAA");
         }
     }
 }
