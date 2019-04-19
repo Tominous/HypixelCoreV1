@@ -28,7 +28,7 @@ public class HypixelCore extends JavaPlugin{
     public static Permission permission = null;
 
     public static Chat chat = null;
-    //public static String mvp = getInstance().getConfig().getString("Hypixel.Settings.MvpRankGUI") + getInstance().getConfig().getString("MVP+");
+    public static String mvp = getInstance().getConfig().getString("Hypixel.Settings.MvpRankGUI") + getInstance().getConfig().getString("MVP+");
 
     public HypixelCore(){
         instance = this;
@@ -44,7 +44,7 @@ public class HypixelCore extends JavaPlugin{
     public String sqlUser = this.getConfig().getString("Hypixel.Connection.MySQL.User");
     public String sqlPw = this.getConfig().getString("Hypixel.Connection.MySQL.Password");
     MySQL MySQL = new MySQL(sqlHost, sqlPort, sqlDb, sqlUser, sqlPw);
-    //SQLite sqLite = new SQLite(getDataFolder() + "/Database.db");
+    SQLite sqLite = new SQLite(getDataFolder() + "/Database.db");
     Connection c = null;
 
 
@@ -156,7 +156,7 @@ public class HypixelCore extends JavaPlugin{
                         "CREATE TABLE IF NOT EXISTS Players (UUID VARCHAR(36)," +
                                 " `Coins` INT(11)," +
                                 " `MysteryDust` INT(11)," +
-                                " `Exp` FLOAT," +
+                                " `EXP` FLOAT," +
                                 " `Level` INT(20)," +
                                 " `Pluse` VARCHAR(6)," +
                                 " `JoinAlert` BOOLEAN," +
